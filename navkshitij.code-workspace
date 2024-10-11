@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../gargi sample website"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "navkshitij"
+	}
+}

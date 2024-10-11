@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://kit.fontawesome.com/13f28dfabd.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="form-box">
+        <img src="navkshitijLogo.png" alt="Logo" class="logo">
+        <h1 id="title">Sign Up</h1>
+        <form>
+          <div class="input-group">
+            <div class="input-field" id="nameField">
+              <i class="fa-solid fa-user"></i>
+              <input type="text" placeholder="Name">
+            </div>
+
+            <div class="input-field">
+              <i class="fa-solid fa-envelope"></i>
+              <input type="email" placeholder="Email">
+            </div>
+
+            <div class="input-field">
+              <i class="fa-solid fa-lock"></i>
+              <input type="password" placeholder="Password">
+            </div>
+
+            <div class="drop-down">
+              <button type="button">Choose a Role</button>
+              <div class="content">
+                <a href="">Staff</a>
+                <a href="">Volunteer</a>
+                <a href="">Parent</a>
+              </div>
+            </div>
+
+            <p>Lost password <a href="#">Click Here</a></p>
+          </div>
+          <div class="btn-field">
+            <button type="button" id="signupBtn">Sign Up</button>
+            <button type="button" id="signinBtn" class="disable">Sign In</button>
+          </div>
+        </form>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      let signupBtn = document.getElementById("signupBtn");
+      let signinBtn = document.getElementById("signinBtn");
+      let nameField = document.getElementById("nameField");
+      let title = document.getElementById("title");
+      const dropdownButton = document.querySelector('.drop-down button');
+      const dropdownContent = document.querySelector('.drop-down .content');
+      const dropdownLinks = dropdownContent.querySelectorAll('a');
+      const defaultDropdownText = "Choose a Role";
+
+      // Reset dropdown content when switching between Sign In and Sign Up
+      function resetDropdown() {
+        dropdownButton.textContent = defaultDropdownText;
+        dropdownContent.style.display = 'none'; // Hide dropdown
+      }
+
+      signinBtn.onclick = function() {
+        nameField.style.maxHeight = "0";
+        title.innerHTML = "Sign In";
+        signupBtn.classList.remove("disable");
+        signinBtn.classList.add("disable");
+        resetDropdown();
+      }
+
+      signupBtn.onclick = function() {
+        nameField.style.maxHeight = "60px";
+        title.innerHTML = "Sign Up";
+        signupBtn.classList.add("disable");
+        signinBtn.classList.remove("disable");
+        resetDropdown();
+      }
+
+      // Toggle dropdown display on button click
+      dropdownButton.addEventListener('click', function(event) {
+        event.preventDefault();
+        dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+      });
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(event) {
+        if (!dropdownButton.contains(event.target) && !dropdownContent.contains(event.target)) {
+          dropdownContent.style.display = 'none';
+        }
+      });
+
+      // Set dropdown button text to selected role
+      dropdownLinks.forEach(link => {
+        link.addEventListener('click', function(event) {
+          event.preventDefault();
+          dropdownButton.textContent = this.textContent;
+          dropdownContent.style.display = 'none';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
